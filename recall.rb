@@ -47,7 +47,7 @@ end
 get '/:id/delete' do
   @note = Note.get params[:id]
   @title = "Confirm deletion of note ##{params[:id]}"
-  erb :delele
+  erb :delete
 end
 
 delete '/:id' do
@@ -62,4 +62,9 @@ get '/:id/complete' do
   n.updated_at = Time.now
   n.save
   redirect '/'
+end
+
+helpers do
+  include Rack::Utils
+  alias_method :h, :escape_html
 end
